@@ -6,7 +6,8 @@ const nextConfig = {
     NEXTAUTH_JWT_SIGNING_KEY: "myjwtsigningkey",
     NEXTAUTH_JWT_ENCRYPTION_KEY: "myjwtencryptionkey",
     NEXTAUTH_URL: "https://chat-livid-omega.vercel.app/",
-    NEXT_PUBLIC_API_URL: "https://chat-livid-omega.vercel.app",
+    NEXT_PUBLIC_API_URL: "https://chat-livid-omega.vercel.app/api",
+    NEXT_PUBLIC_SITE_URL: "https://chat-livid-omega.vercel.app/",
   },
   typescript: {
     // !! WARN !!
