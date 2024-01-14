@@ -1,4 +1,4 @@
-import { AuthButton } from "app/components/littleComponents/AuthButton";
+import { AuthButton } from "components/littleComponents/AuthButton";
 
 
 export default function Page() {

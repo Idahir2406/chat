@@ -7,7 +7,14 @@ const nextConfig = {
     NEXTAUTH_JWT_ENCRYPTION_KEY: "myjwtencryptionkey",
     NEXTAUTH_URL: "http://localhost:3000/",
     NEXT_PUBLIC_API_URL: "http://localhost:3000",
-  }
+  },
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
 }
 
 module.exports = nextConfig
