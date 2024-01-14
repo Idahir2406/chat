@@ -43,7 +43,7 @@ export const NewChats = ({ session }: { session: any }) => {
           </div>
         </Link>
       ) : (
-        <></>
+        <> no estas logueado</>
       )
     );
 };
