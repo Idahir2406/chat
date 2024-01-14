@@ -17,17 +17,25 @@ interface Message {
 }
 
 interface Chat {
-
+  sender: string;
+  message: string;
   messages: Message[];
-
 }
+
+interface ChatMessage {
+  messageId: string;
+  sender: string;
+  content: string;
+  timestamp: string;
+  // Puedes agregar más propiedades según tus requisitos
+}
+
 
 interface ConversationContextProps {
-  chats: Chat[];
-  setChats: Dispatch<SetStateAction<Chat[]>>;
-  addNewMessage: (message: Message, chatId: string) => void;
+  chats: (Chat | ChatMessage)[]; // Permitir que el array contenga Chat o ChatMessage
+  setChats: Dispatch<SetStateAction<(Chat | ChatMessage)[]>>;
+  addNewMessage: (message: Message, chatIndex: number) => void;
 }
-
 const defaultChats: Chat[] = [];
 
 export const useConversation = () => {
@@ -45,10 +53,14 @@ export const ConversationContext = createContext<
 >(undefined);
 
 export const ConversationProvider = ({ children }: { children: ReactNode }) => {
-  const [chats, setChats] = useState([]  );
+  const [chats, setChats] = useState(defaultChats);
 
-  const addNewMessage = (message: Message) => {
-    setChats([...chats, message]);
+  const addNewMessage = (message: Message, chatIndex: number) => {
+    setChats((prevChats) => {
+      const updatedChats = [...prevChats];
+      updatedChats[chatIndex].messages.push(message);
+      return updatedChats;
+    });
   };
 
   return (

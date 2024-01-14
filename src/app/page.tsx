@@ -1,16 +1,11 @@
-import { useUserSession } from "hooks/useUserSession";
 export default async function Home() {
-  const session = await useUserSession();
-
   return (
-
-      <div
-        id="first-child"
-        className="flex-1 flex flex-col  h-full relative p-4 gap-4"
-      >
-        comenzar
-      </div>
-
+    <div
+      id="first-child"
+      className="flex-1 flex flex-col  h-full relative p-4 gap-4"
+    >
+      comenzar
+    </div>
   );
 }
 

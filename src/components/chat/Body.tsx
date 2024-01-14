@@ -19,8 +19,8 @@ export const Body = ({
   receiverId,
   senderId,
 }: {
-  receiverId: string;
-  senderId: string;
+  receiverId: string | null | undefined;
+  senderId: string | null | undefined;
 }) => {
   const { chats, setChats } = useConversation();
   const { socket, isConnected, on, emit } = useSocket();
@@ -44,23 +44,25 @@ export const Body = ({
   };
 
   useEffect(() => {
-    getChats(receiverId, senderId);
-  }, []);
+    if (receiverId && senderId) {
+      getChats(receiverId, senderId);
+    }
+  }, [receiverId, senderId]);
 
   useEffect(() => {
     on("reciveMessage", (data) => {
-      const newMessage:any= { 
+      const newMessage: ChatMessage = {
         sender: data.senderId,
         message: data.message,
         read: false,
-      }
+      };
       setChats((state) => [...state, newMessage]);
     });
 
     return () => {
-      socket?.off("reciveMessage",)
+      socket?.off("reciveMessage");
     };
-  }, [on, emit]);
+  }, [on, emit, socket, setChats]);
 
   useEffect(() => {
     scrollToBottom();
@@ -72,17 +74,17 @@ export const Body = ({
       className="flex-1 overflow-y-scroll no-scrollbar flex flex-col gap-2"
     >
       {chats &&
-        chats.map((message, index) =>
-          message.sender === senderId ? (
+        chats.map(({ sender, message }, index) =>
+          sender === senderId ? (
             <div key={index} className="flex justify-end ">
               <div className="bg-[#4c7dfe] rounded-md py-2 px-4 font-normal text-white text-sm w-5/12 right-0">
-                {message.message}
+                {message}
               </div>
             </div>
           ) : (
             <div key={index} className="flex items-start justify-start">
               <div className="bg-[#f9f9f9] rounded-md py-2 px-4 font-normal text-sm w-5/12 left-0">
-                {message.message}
+                {message}
               </div>
             </div>
           )

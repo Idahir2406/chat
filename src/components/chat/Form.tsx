@@ -7,8 +7,8 @@ export const Form = ({
   receiverId,
   senderId,
 }: {
-  receiverId: string;
-  senderId: string;
+  receiverId: string | null | undefined;
+  senderId: string | null | undefined;
 }) => {
   const [message, setMessage] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
