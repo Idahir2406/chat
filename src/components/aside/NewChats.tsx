@@ -3,7 +3,7 @@ import { UserIcon } from "../littleComponents/UserIcon";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 const getUsers = async () => {
-  const res = await fetch("http://localhost:3000/api/users");
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/users");
   const data = await res.json();
   return data;
 };

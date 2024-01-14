@@ -36,7 +36,7 @@ export const Body = ({
 
   const getChats = async (receiverId: string, senderId: string) => {
     const res = await fetch(
-      `http://localhost:3000/api/chat/${receiverId}/${senderId}`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/chat/${receiverId}/${senderId}`
     );
     const data = await res.json();
     console.log(data);
